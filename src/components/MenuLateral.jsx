@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function MenuLateral() {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const buttonStyle = ({ isActive }) =>
@@ -32,15 +32,28 @@ export default function MenuLateral() {
       >
         Home
       </NavLink>
-      <NavLink to="/participaciones" className={buttonStyle}>
-        Participaciones
-      </NavLink>
-      <NavLink to="/acercade" className={buttonStyle}>
-        Acerca de
-      </NavLink>
-
-      
-
+      {/* Opciones para usuario */}
+      {user?.role === "user" && (
+        <>
+          <NavLink to="/participaciones" className={buttonStyle}>
+            Participaciones
+          </NavLink>
+          <NavLink to="/acercade" className={buttonStyle}>
+            Acerca de
+          </NavLink>
+        </>
+      )}
+      {/* Opciones para administrador */}
+      {user?.role === "admin" && (
+        <>
+          <NavLink to="/admin/dashboard" className={buttonStyle}>
+            Agregar Evento
+          </NavLink>
+          <NavLink to="/acercade" className={buttonStyle}>
+            Acerca de
+          </NavLink>
+        </>
+      )}
       <button
         className="w-40 text-base py-3 mt-10 rounded-lg font-semibold border border-gray-300 bg-white text-gray-700
         hover:bg-red-50 hover:text-red-600 hover:border-red-400 hover:shadow-lg hover:scale-105 transition"
