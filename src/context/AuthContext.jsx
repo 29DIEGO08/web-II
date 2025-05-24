@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -7,36 +7,24 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const stored = localStorage.getItem("user");
-    return stored ? JSON.parse(stored) : null;
-  });
+  const [user, setUser] = useState(null);
 
-  const login = (username, password) => {
-    if (username && password) {
-      setUser({ username });
-      localStorage.setItem("user", JSON.stringify({ username }));
-      return true;
+  const login = async (correo, password) => {
+    if (correo === "admin@gmail.com" && password === "admin") {
+      setUser({ correo, role: "admin" });
+      return { success: true, role: "admin" };
+    } else if (correo === "usuario@gmail.com" && password === "user") {
+      setUser({ correo, role: "user" });
+      return { success: true, role: "user" };
+    } else {
+      setUser(null);
+      return { success: false };
     }
-    return false;
   };
 
-  const register = (username, password) => {
-    if (username && password) {
-      setUser({ username });
-      localStorage.setItem("user", JSON.stringify({ username }));
-      return true;
-    }
-    return false;
-  };
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
-  };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, login }}>
       {children}
     </AuthContext.Provider>
   );

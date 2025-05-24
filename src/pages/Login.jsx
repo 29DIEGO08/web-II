@@ -4,15 +4,23 @@ import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
   const [correo, setCorreo] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("1234");
   const { login } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (login(correo, password)) {
-      navigate("/");
+    const response = await login(correo, password);
+
+    if (response && response.success) {
+      if (response.role === "admin") {
+        navigate("/admin/dashboard");
+      } else if (response.role === "user") {
+        navigate("/");
+      } else {
+        navigate("/"); 
+      }
     } else {
       setError("Correo o contraseña incorrectos");
     }

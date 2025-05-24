@@ -1,5 +1,5 @@
-import MenuLateral from "../components/MenuLateral";
-import Card from "../components/Card";
+import MenuLateral from "../../components/MenuLateral";
+import Card from "../../components/Card";
 
 export default function Participaciones() {
   const cards = [

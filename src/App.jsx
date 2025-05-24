@@ -5,9 +5,17 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
-import Participaciones from "./pages/Participaciones";
+import Participaciones from "./pages/páginasExclusivasUsuario/Participaciones";
 import AcercaDe from "./pages/AcercaDe";
-import Formulario from "./pages/Formulario"; // Agrega tu formulario aquí
+import Formulario from "./pages/páginasExclusivasUsuario/Formulario";
+
+function AdminDashboard() {
+  return <div className="p-8">¡Bienvenido Administrador!</div>;
+}
+
+function UserHome() {
+  return <div className="p-8">¡Bienvenido Usuario!</div>;
+}
 
 export default function App() {
   return (
@@ -16,6 +24,7 @@ export default function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          
           <Route
             element={
               <ProtectedRoute>
@@ -27,6 +36,8 @@ export default function App() {
             <Route path="/participaciones" element={<Participaciones />} />
             <Route path="/acercade" element={<AcercaDe />} />
             <Route path="/formulario" element={<Formulario />} /> 
+            <Route path="/user/home" element={<UserHome />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
           </Route>
         </Routes>
       </BrowserRouter>
