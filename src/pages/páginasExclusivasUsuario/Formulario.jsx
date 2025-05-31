@@ -15,7 +15,6 @@ export default function Formulario() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes enviar el formulario a una API o hacer lo que necesites
     alert("¡Formulario enviado!");
   };
 
