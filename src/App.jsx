@@ -5,9 +5,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
-import Participaciones from "./pages/páginasExclusivasUsuario/Participaciones";
+import Participaciones from "./pages/paginasExclusivasUsuario/Participaciones";
 import AcercaDe from "./pages/AcercaDe";
-import Formulario from "./pages/páginasExclusivasUsuario/Formulario";
+import Formulario from "./pages/paginasExclusivasUsuario/Formulario";
 
 function AdminDashboard() {
   return <div className="p-8">¡Bienvenido Administrador!</div>;
