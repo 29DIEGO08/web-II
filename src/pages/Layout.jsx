@@ -1,16 +1,13 @@
-import MenuLateral from "../components/MenuLateral";
 import { Outlet } from "react-router-dom";
-import "../index.css";
+import MenuLateral from "../components/MenuLateral";
 
-const Layout = () => {
+export default function Layout() {
   return (
-    <div className="layout">
+    <div className="flex min-h-screen bg-neutral-100">
       <MenuLateral />
-      <div className="main-content">
+      <main className="flex-1 ml-64 p-8">
         <Outlet />
-      </div>
+      </main>
     </div>
   );
-};
-
-export default Layout;
+}

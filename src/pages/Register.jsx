@@ -1,84 +1,61 @@
-import React, { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-  const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const { register } = useAuth();
-  const navigate = useNavigate();
+  const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    if (!nombre || !correo || !password || !confirmPassword) {
-      setError("Todos los campos son obligatorios");
-      return;
-    }
-    if (password !== confirmPassword) {
+    if (password !== confirm) {
       setError("Las contraseñas no coinciden");
-      return;
-    }
-    if (register(correo, password)) {
-      navigate("/");
+    } else if (!correo || !password) {
+      setError("Completa todos los campos");
     } else {
-      setError("Error al registrarse");
+      // Aquí podrías agregar lógica real de registro
+      navigate("/login");
     }
-  };
+  }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
-        <h2 className="text-2xl font-bold mb-6 text-center">Registro</h2>
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
-            placeholder="Nombre"
-            value={nombre}
-            onChange={e => setNombre(e.target.value)}
-            required
-          />
-          <input
-            type="email"
-            className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
-            placeholder="Correo"
-            value={correo}
-            onChange={e => setCorreo(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
-            placeholder="Contraseña"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
-            placeholder="Confirmar contraseña"
-            value={confirmPassword}
-            onChange={e => setConfirmPassword(e.target.value)}
-            required
-          />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition font-semibold shadow"
-          >
-            Registrarse
-          </button>
-        </form>
-        <p className="mt-4 text-center text-gray-600">
-          ¿Ya tienes cuenta?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline">
-            Inicia Sesión
-          </Link>
-        </p>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-blue-50">
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">Registro</h2>
+        {error && <p className="text-red-500 mb-3 text-center">{error}</p>}
+        <input
+          type="email"
+          className="w-full border border-gray-300 rounded-xl px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          placeholder="Correo"
+          value={correo}
+          onChange={e => setCorreo(e.target.value)}
+        />
+        <input
+          type="password"
+          className="w-full border border-gray-300 rounded-xl px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          placeholder="Contraseña"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <input
+          type="password"
+          className="w-full border border-gray-300 rounded-xl px-3 py-2 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          placeholder="Confirmar Contraseña"
+          value={confirm}
+          onChange={e => setConfirm(e.target.value)}
+        />
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl font-semibold transition shadow"
+        >
+          Registrarse
+        </button>
+        <div className="mt-4 text-center">
+          <a href="/login" className="text-blue-500 underline hover:text-blue-700 text-sm">¿Ya tienes cuenta? Inicia sesión</a>
+        </div>
+      </form>
     </div>
   );
 }
