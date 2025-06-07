@@ -8,6 +8,7 @@ import Layout from "../pages/Layout";
 import AcercaDe from "../pages/AcercaDe";
 import Formulario from "../pages/paginasExclusivasUsuario/Formulario";
 import Participaciones from "../pages/paginasExclusivasUsuario/Participaciones";
+import CrearEvento from "../pages/páginasExclusivasAdmin/CrearEvento";
 import Error404 from "../pages/Error404";
 
 function AdminDashboard() {
@@ -27,6 +28,7 @@ export default function AppRoutes() {
           <Route path="/register" element={<Register />} />
           <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
             <Route path="/" element={<Home />} />
+            <Route path="/crear-evento" element={<CrearEvento/>}/>
             <Route path="/participaciones" element={<Participaciones />} />
             <Route path="/acercade" element={<AcercaDe />} />
             <Route path="/formulario" element={<Formulario />} />
