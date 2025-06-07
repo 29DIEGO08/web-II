@@ -28,7 +28,7 @@ export default function AppRoutes() {
           <Route path="/register" element={<Register />} />
           <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
             <Route path="/" element={<Home />} />
-            <Route path="/crear-evento" element={<CrearEvento/>}/>
+            <Route path="/admin/crear-evento" element={<CrearEvento/>}/>
             <Route path="/participaciones" element={<Participaciones />} />
             <Route path="/acercade" element={<AcercaDe />} />
             <Route path="/formulario" element={<Formulario />} />
