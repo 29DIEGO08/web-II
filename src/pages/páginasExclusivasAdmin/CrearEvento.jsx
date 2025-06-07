@@ -21,7 +21,7 @@ export default function CrearEvento() {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://eventos-25.onrender.com', {
+      const response = await fetch('https://eventos-25.onrender.com/api/eventos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
